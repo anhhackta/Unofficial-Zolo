@@ -1,0 +1,31 @@
+{
+    "productName": "unofficial-zolo",
+    "version": "0.0.0",
+    "identifier": "com.unofficial-zolo.manager",
+    "build": {
+        "beforeDevCommand": "npm run dev",
+        "beforeBuildCommand": "npm run build",
+        "devUrl": "http://localhost:1420",
+        "frontendDist": "../dist"
+    },
+    "app": {
+        "windows": [
+            {
+                "title": "Unofficial Zolo",
+                "width": 800,
+                "height": 600
+            }
+        ],
+        "security": {
+            "csp": null
+        }
+    },
+    "bundle": {
+        "active": true,
+        "targets": "all",
+        "icon": [
+            "icons/icon.png",
+            "icons/icon.ico"
+        ]
+    }
+}

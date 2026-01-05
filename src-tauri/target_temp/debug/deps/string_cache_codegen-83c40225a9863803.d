@@ -1,0 +1,7 @@
+D:\Game\Unofficial Zolo\src-tauri\target_temp\debug\deps\string_cache_codegen-83c40225a9863803.d: C:\Users\BriarAngry\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\string_cache_codegen-0.5.4\lib.rs
+
+D:\Game\Unofficial Zolo\src-tauri\target_temp\debug\deps\libstring_cache_codegen-83c40225a9863803.rlib: C:\Users\BriarAngry\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\string_cache_codegen-0.5.4\lib.rs
+
+D:\Game\Unofficial Zolo\src-tauri\target_temp\debug\deps\libstring_cache_codegen-83c40225a9863803.rmeta: C:\Users\BriarAngry\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\string_cache_codegen-0.5.4\lib.rs
+
+C:\Users\BriarAngry\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\string_cache_codegen-0.5.4\lib.rs:
