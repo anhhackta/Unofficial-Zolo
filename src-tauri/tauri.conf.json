@@ -1,6 +1,6 @@
 {
     "productName": "unofficial-zolo",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "identifier": "com.unofficial-zolo.manager",
     "build": {
         "beforeDevCommand": "npm run dev",
@@ -11,9 +11,14 @@
     "app": {
         "windows": [
             {
-                "title": "Unofficial Zolo",
-                "width": 800,
-                "height": 600
+                "title": "Unofficial Zolo Manager",
+                "width": 1000,
+                "height": 700,
+                "minWidth": 800,
+                "minHeight": 600,
+                "resizable": true,
+                "fullscreen": false,
+                "decorations": true
             }
         ],
         "security": {
@@ -26,6 +31,13 @@
         "icon": [
             "icons/icon.png",
             "icons/icon.ico"
-        ]
+        ],
+        "shortDescription": "Unofficial Multi-Account Zalo Manager",
+        "longDescription": "Unofficial Zolo is a community-maintained Linux desktop application for managing multiple Zalo Web accounts with isolated profiles."
+    },
+    "plugins": {
+        "shell": {
+            "open": true
+        }
     }
 }

@@ -1,19 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="/src/styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unofficial Zolo</title>
+  <title data-i18n="app.title">Unofficial Zolo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
-    <h1>Unofficial Zolo Manager</h1>
-    <div id="account-list"></div>
-    <button id="add-account-btn">Add Account</button>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">Z</div>
+          <h1 data-i18n="app.title">Unofficial Zolo</h1>
+        </div>
+        <p class="subtitle" data-i18n="app.subtitle">Professional Multi-Account Manager</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <i class="search-icon">🔍</i>
+        <input type="text" id="search-input" class="search-input" data-i18n-placeholder="app.search_placeholder"
+          placeholder="Search accounts...">
+      </div>
+
+      <div class="account-list-container">
+        <div id="account-list" class="account-list">
+          <!-- Accounts will be injected here -->
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="add-account-btn" class="primary-btn">
+          <span class="icon">+</span> <span data-i18n="app.add_account">Add New Account</span>
+        </button>
+        <button id="settings-btn" class="btn-sidebar">
+          <span class="icon">⚙️</span> <span data-i18n="app.settings">Settings</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area / Welcome Screen -->
+    <main class="main-content">
+      <div class="welcome-screen">
+        <div class="welcome-card">
+          <div class="feature-icon">✨</div>
+          <h2 id="welcome-message" data-i18n="app.welcome">Welcome to Zolo</h2>
+          <p data-i18n="app.welcome_desc">Manage multiple Zalo accounts with complete isolation.</p>
+
+          <div class="features-grid">
+            <div class="feature-item">
+              <span class="feature-icon">🔒</span>
+              <h3 data-i18n="app.feature_isolated">Isolated Profiles</h3>
+              <p data-i18n="app.feature_isolated_desc">Separate storage for each account</p>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🎨</span>
+              <h3 data-i18n="app.feature_ui">Professional UI</h3>
+              <p data-i18n="app.feature_ui_desc">Modern Green Theme & Dark Mode</p>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🚀</span>
+              <h3 data-i18n="app.feature_native">Native Speed</h3>
+              <p data-i18n="app.feature_native_desc">Built with Rust & Tauri</p>
+            </div>
+          </div>
+
+          <div class="disclaimer-box">
+            <h4><span data-i18n="app.disclaimer_title">⚠️ Unofficial Client</span></h4>
+            <p data-i18n="app.disclaimer_text">This application is community-maintained and is not affiliated with Zalo
+              or VNG Corporation.
+              Zalo Web is loaded directly from official servers without modification.</p>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
+
+  <!-- Add/Edit Account Modal -->
+  <div id="account-modal" class="modal hidden">
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h3 id="modal-title" data-i18n="modal.add_title">Add New Account</h3>
+        <button class="close-modal-btn icon-btn">×</button>
+      </div>
+
+      <form id="account-form">
+        <input type="hidden" id="account-id">
+
+        <div class="form-group">
+          <label for="account-name" data-i18n="modal.account_name">Account Name</label>
+          <input type="text" id="account-name" data-i18n-placeholder="modal.account_name_placeholder"
+            placeholder="e.g. Personal, Work, Marketing" required>
+        </div>
+
+        <div class="form-group">
+          <label for="account-proxy" data-i18n="modal.proxy_config">Proxy Config (Optional)</label>
+          <input type="text" id="account-proxy" data-i18n-placeholder="modal.proxy_placeholder"
+            placeholder="http://user:pass@host:port">
+          <p class="input-hint" data-i18n="modal.proxy_hint">
+            Supported: HTTP, SOCKS5. <br>
+            Note: Start without proxy first to verify connection.
+          </p>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="delete-account-btn" class="danger-btn hidden"
+            data-i18n="modal.delete">Delete</button>
+          <div class="spacer"></div>
+          <button type="button" class="cancel-btn secondary-btn" data-i18n="modal.cancel">Cancel</button>
+          <button type="submit" id="save-account-btn" class="primary-btn" data-i18n="modal.save">Save Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h3 data-i18n="modal.settings_title">Application Settings</h3>
+        <button class="close-modal-btn icon-btn">×</button>
+      </div>
+
+      <div class="form-group">
+        <label for="language-select" data-i18n="modal.language">Language</label>
+        <select id="language-select">
+          <option value="en">English (US)</option>
+          <option value="vi">Tiếng Việt</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="theme-select" data-i18n="modal.appearance">Appearance</label>
+        <select id="theme-select">
+          <option value="system" data-i18n="theme.system">System Default</option>
+          <option value="dark" data-i18n="theme.dark">Dark Theme</option>
+          <option value="light" data-i18n="theme.light">Light Theme</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="modal.data_management">Data Management</label>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-i18n="modal.data_desc">
+          Managing storage and cache for all accounts.
+        </p>
+        <button class="secondary-btn" style="width: 100%; opacity: 0.7; cursor: not-allowed;" disabled
+          data-i18n="modal.clean_cache">
+          Clean Cache (Coming Soon)
+        </button>
+      </div>
+
+      <div class="modal-actions">
+        <div class="spacer"></div>
+        <button type="button" class="close-modal-btn primary-btn" data-i18n="modal.close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 
